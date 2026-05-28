@@ -1,8 +1,15 @@
--- Lock com Zoom e Troca de Alvos (PC + Mobile)
--- Atualizado com ID da imagem, mortes desativam lock, e troca de alvo por movimento
+local art = [[
+  ---  ____ ____  _     
+--- / ___/ ___|| |    
+---| |   \___ \| |    
+---| |___ ___) | |___ 
+--- \____|____/|_____|
+]]
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+local Log = game:GetService("TestService")
 
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
@@ -276,22 +283,26 @@ local function desativarScript()
 	print("Log: DISABLE")
 end
 
--- Escuta o teclado do PC
+-- Toggle PC corrigido
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    -- Se o jogador estiver digitando no chat, o script ignora para não ativar sem querer
     if gameProcessed then return end
     
     -- Verifica se a tecla pressionada foi o T
     if input.KeyCode == Enum.KeyCode.T then
-      enabled = not enabled -- Feijão com farinha doce
+        enabled = not enabled -- Usamos a variável 'enabled' que já existe no seu script
         
-        if ligado then
-            ativarScript()
+        if enabled then
+            button.Text = "Lock: ON"
+            enable()
+            log:Message("Log: ENABLE")
         else
-            desativarScript()
+            button.Text = "Lock: OFF"
+            disable()
+            log:Message("Log: DISABLE")
         end
     end
 end)
+
 
 -- Teclas para ajustar zoom no teclado (PC)
 UserInputService.InputBegan:Connect(function(input, gp)
@@ -303,8 +314,5 @@ UserInputService.InputBegan:Connect(function(input, gp)
 	end
 end)
 
-print(" --------------------------- ")
-print(" |           LOG")
-print(" --------------------------- ")
-print(" | Executed will sucess.    ")
-print(" --------------------------- ")
+
+log:Message(art)
