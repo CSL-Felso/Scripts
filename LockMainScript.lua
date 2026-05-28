@@ -9,7 +9,7 @@ local art = [[
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
-local Log = game:GetService("TestService")
+local log = game:GetService("TestService")
 
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
