@@ -263,6 +263,36 @@ button.MouseButton1Click:Connect(function()
 	end
 end)
 
+-- Toggle PC
+-- Coloque o código que deve acontecer quando o script LIGAR aqui dentro
+local function ativarScript()
+    enable()
+	print("Log: ENABLE")
+end
+
+-- Coloque o código que deve acontecer quando o script DESLIGAR aqui dentro
+local function desativarScript()
+    disable()
+	print("Log: DISABLE")
+end
+
+-- Escuta o teclado do PC
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    -- Se o jogador estiver digitando no chat, o script ignora para não ativar sem querer
+    if gameProcessed then return end
+    
+    -- Verifica se a tecla pressionada foi o T
+    if input.KeyCode == Enum.KeyCode.T then
+      enabled = not enabled -- Feijão com farinha doce
+        
+        if ligado then
+            ativarScript()
+        else
+            desativarScript()
+        end
+    end
+end)
+
 -- Teclas para ajustar zoom no teclado (PC)
 UserInputService.InputBegan:Connect(function(input, gp)
 	if gp then return end
@@ -272,3 +302,9 @@ UserInputService.InputBegan:Connect(function(input, gp)
 		zoom = math.clamp(zoom + 1, minZoom, maxZoom)
 	end
 end)
+
+print(" --------------------------- ")
+print(" |           LOG")
+print(" --------------------------- ")
+print(" | Executed will sucess.    ")
+print(" --------------------------- ")
