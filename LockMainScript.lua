@@ -33,9 +33,10 @@ gui.Parent = player:WaitForChild("PlayerGui")
 gui.ResetOnSpawn = false
 
 local button = Instance.new("TextButton")
-button.Size = UDim2.fromOffset(50,60)
-button.Position = UDim2.new(1,-250,0,190)
-button.Text = "Lock: ○ T"
+button.Size = UDim2.fromOffset(70,50)
+button.Position = UDim2.new(1,-260,0,190)
+button.Text = "T: Lock: ○"
+button.TextSize = 16
 button.BackgroundColor3 = Color3.fromRGB(30,30,30)
 button.TextColor3 = Color3.new(1,1,1)
 button.Font = Enum.Font.GothamBold
@@ -108,7 +109,7 @@ end
 local function disable()
 	enabled = false
 	target = nil
-	button.Text = "Lock: ○ T"
+	button.Text = "Lock: OFF"
 
 	cleanupConnections()
 	camera.CameraType = Enum.CameraType.Custom
@@ -263,10 +264,12 @@ button.MouseButton1Click:Connect(function()
 	enabled = not enabled
 
 	if enabled then
-		button.Text = "Lock: ● T"
+		button.Text = "T: Lock: ● "
 		enable()
+      log:Message("[LOG]: Lock On")
 	else
 		disable()
+      log:Message("[LOG]: Lock Off")
 	end
 end)
 
@@ -274,13 +277,13 @@ end)
 -- Coloque o código que deve acontecer quando o script LIGAR aqui dentro
 local function ativarScript()
     enable()
-	log:Message("Log: ENABLE")
+	print("Log: ENABLE")
 end
 
 -- Coloque o código que deve acontecer quando o script DESLIGAR aqui dentro
 local function desativarScript()
     disable()
-	log:Message("Log: DISABLE")
+	print("Log: DISABLE")
 end
 
 -- Toggle PC corrigido
@@ -292,11 +295,11 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         enabled = not enabled -- Usamos a variável 'enabled' que já existe no seu script
         
         if enabled then
-            button.Text = "Lock: ON"
+            button.Text = "T: Lock: ●"
             enable()
             log:Message("Log: ENABLE")
         else
-            button.Text = "Lock: OFF"
+            button.Text = "T: Lock: ○"
             disable()
             log:Message("Log: DISABLE")
         end
